@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JB Shop - Toko Online Terpercaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a1a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #00ffff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #00ffff;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff006e;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 110, 0.1));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.9), 0 0 30px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #00ffff, #ff006e);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.6);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .section-title p {
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff006e;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: #00ffff;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-right: 5px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .add-to-cart:hover {
+            background: #00ffff;
+            color: #0a0a1a;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+            background: rgba(10, 10, 26, 0.5);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .category-icon {
+            font-size: 40px;
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 26, 0.8);
+            padding: 50px 0 20px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            color: #00ffff;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: #00ffff;
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00ffff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #00ffff;
+            color: #0a0a1a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888888;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">ZEINX SHOP</div>
+                <ul class="nav-links">
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#">Produk</a></li>
+                    <li><a href="#">Kategori</a></li>
+                    <li><a href="#">Promo</a></li>
+                    <li><a href="#">Tentang</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Selamat Datang di Zeinx Shop</h1>
+            <p>Temukan berbagai produk berkualitas dengan harga terbaik hanya di Zeinx Shop. Pengalaman berbelanja yang aman, nyaman, dan menyenangkan.</p>
+            <a href="#" class="btn">Belanja Sekarang</a>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Produk Unggulan</h2>
+                <p>Pilihan produk terbaik yang kami rekomendasikan untuk Anda</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://picsum.photos/seed/product1/400/300.jpg" alt="Product 1">
+                        <span class="product-badge">Hot</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Fresh</h3>
+                        <div class="product-price">Rp 20.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span>(42)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://picsum.photos/seed/product2/400/300.jpg" alt="Product 2">
+                        <span class="product-badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Tinjau</h3>
+                        <div class="product-price">Rp 10.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span>(28)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://picsum.photos/seed/product3/400/300.jpg" alt="Product 3">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Batu</h3>
+                        <div class="product-price">Rp 30.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span>(56)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://picsum.photos/seed/product4/400/300.jpg" alt="Product 4">
+                        <span class="product-badge">Sale</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Lumut</h3>
+                        <div class="product-price">Rp 40.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span>(37)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button> <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Lumut</h3>
+                        <div class="product-price">Rp 40.000</div><div class="product-img">
+                        <img src="https://picsum.photos/seed/product4/400/300.jpg" alt="Product 4">
+                        <span class="product-badge">Sale</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Lumut</h3>
+                        <div class="product-price">Rp 40.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span>(37)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button> <div class="product-info">
+                        <h3 class="product-title">Jasa Unban Permanen Lumut</h3>
+                        <div class="product-price">Rp 40.000</div>
+                        <div class="product-img">
+                        <img src="https://picsum.photos/seed/product4/400/300.jpg" alt="Product 4">
+                        <span class="product-badge">Unggulan</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Murid Unban</h3>
+                        <div class="product-price">Rp 50.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                           <span>(37)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                            </div>
+                        </div class="product-img">
+                        <img src="https://picsum.photos/seed/product4/400/300.jpg" alt="Product 4">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pt Unban</h3>
+                        <div class="product-price">Rp 60.000</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span>(37)</span>
+                        </div>
+                        <button class="add-to-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kategori Produk</h2>
+                <p>Jelajahi berbagai kategori produk yang tersedia di Zeinx Shop</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="category-name">Unban Permanen Fresh</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="category-name">Unban Permanen Tinjau</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="category-name">Unban Permanen Batu</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="category-name">Unban Permanen Lumut</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="category-name">Murid Unban</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="category-name">Pt Unban</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang Zeinx Shop</h3>
+                    <p>Zeinx Shop adalah toko online terpercaya yang menyediakan berbagai produk elektronik berkualitas dengan harga terbaik.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Layanan Pelanggan</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Pusat Bantuan</a></li>
+                        <li><a href="#">Cara Pembelian</a></li>
+                        <li><a href="#">Pengiriman</a></li>
+                        <li><a href="#">Pengembalian</a></li>
+                        <li><a href="#">Garansi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Informasi</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Promo</a></li>
+                        <li><a href="#">Affiliate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</li>
+                        <li><i class="fas fa-phone"></i> +62 8191 262 5546</li>
+                        <li><i class="fas fa-envelope"></i> info@jbshop.com</li>
+                        <li><i class="fas fa-clock"></i> Senin - Minggu: 06.00 - 06.00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Zeinx Shop. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#00ffff'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00ffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const cartCount = document.querySelector('.cart-count');
+                let count = parseInt(cartCount.textContent);
+                cartCount.textContent = count + 1;
+                
+                // Visual feedback
+                this.textContent = 'Ditambahkan!';
+                this.style.background = '#00ff88';
+                this.style.borderColor = '#00ff88';
+                
+                setTimeout(() => {
+                    this.textContent = 'Tambah ke Keranjang';
+                    this.style.background = 'transparent';
+                    this.style.borderColor = '#00ffff';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
